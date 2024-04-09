@@ -1,0 +1,22 @@
+# redis连接配置
+spring:
+  datasource:
+    # 使用druid数据源
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://192.168.1.151:5432/postgres
+    username: postgres
+    password: 12345678qq
+    # 连接池大小根据实际情况调整
+    max-active: 10
+    max-pool-prepared-statement-per-connection-size: 10
+#  redis:
+#    host: 192.168.1.218
+#    port: 6379
+#    password: openpay123
+#    connect-timeout: 60000
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #SQL日志打印
+    map-underscore-to-camel-case: true #开启驼峰命名
+  mapper-locations: classpath*:/mapping/**/*.xml
+
