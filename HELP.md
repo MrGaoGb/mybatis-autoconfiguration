@@ -16,6 +16,55 @@ http://localhost:8080/product/listAll?pname=%E7%AC%94
 ```
 
 
+```sql
+
+-- SQL 先表关联和where查询有什么区别， 查询条件：AND a4.delete_status = 0
+
+
+SELECT
+	a1.*,
+	a2.model_name,
+	a2.terminal_type,
+	a3.factory_code,
+	a3.factory_name
+	,a4.chl_merchant_no 
+FROM
+	jp_user_terminal_info a1
+	LEFT JOIN jp_user_terminal_model a2 ON a2.ID = a1.model_id
+	LEFT JOIN jp_user_terminal_factory a3 ON a3.ID = a1.factory_id
+	LEFT JOIN jp_user_channel_merch_term a4 ON a1.terminal_sn = a4.term_sn  AND a4.delete_status = 0 
+WHERE
+	a1.delete_status = 0 
+	AND a1.one_level_agent_no = '83000021' 
+ORDER BY
+	a1.ID DESC
+
+
+
+
+
+SELECT
+    a1.*,
+    a2.model_name,
+    a2.terminal_type,
+    a3.factory_code,
+    a3.factory_name
+        ,a4.chl_merchant_no
+FROM
+    jp_user_terminal_info a1
+        LEFT JOIN jp_user_terminal_model a2 ON a2.ID = a1.model_id
+        LEFT JOIN jp_user_terminal_factory a3 ON a3.ID = a1.factory_id
+        LEFT JOIN jp_user_channel_merch_term a4 ON a1.terminal_sn = a4.term_sn  
+WHERE
+  
+    a1.delete_status = 0
+  AND a4.delete_status = 0
+  
+  AND a1.one_level_agent_no = '83000021'
+ORDER BY
+    a1.ID DESC
+```
+
 ### Guides
 
 
