@@ -67,6 +67,7 @@ ORDER BY
 ```
 
 ### Spring中BeanDefinitionRegistryPostProcessor注册
+> Mybatis中拦截器逻辑那块需要注意下
 
 
 
