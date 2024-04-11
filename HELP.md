@@ -14,13 +14,14 @@ http://localhost:8080/product/listAll
 http://localhost:8080/product/listAll?pname=%E7%AC%94
 
 ```
-
+### 2、SQL查询问题
+> 需要确认先执行表关联，还是执行Where条件。
 
 ```sql
 
 -- SQL 先表关联和where查询有什么区别， 查询条件：AND a4.delete_status = 0
 
-
+-- 可以查到数据
 SELECT
 	a1.*,
 	a2.model_name,
@@ -42,7 +43,7 @@ ORDER BY
 
 
 
-
+-- 查不到数据
 SELECT
     a1.*,
     a2.model_name,
