@@ -9,6 +9,8 @@ spring:
     # 连接池大小根据实际情况调整
     max-active: 10
     max-pool-prepared-statement-per-connection-size: 10
+  main:
+    allow-circular-references: true # 开启循环依赖
 #  redis:
 #    host: 192.168.1.218
 #    port: 6379
@@ -19,4 +21,3 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #SQL日志打印
     map-underscore-to-camel-case: true #开启驼峰命名
   mapper-locations: classpath*:/mapping/**/*.xml
-
