@@ -69,5 +69,11 @@ ORDER BY
 ### Spring中BeanDefinitionRegistryPostProcessor注册
 > Mybatis中拦截器逻辑那块需要注意下
 
+### 关键方法
+#### MapperScannerConfigurer
+> 1、实现接口 BeanDefinitionRegistryPostProcessor 和 InitializingBean 接口,
+> 重点关注方法: postProcessBeanDefinitionRegistry() 和 afterPropertiesSet()
+> 
 
-
+#### ClassPathMapperScanner和ClassPathBeanDefinitionScanner
+> scan() 和 doScan() 方法，可以用来扫描类上的注解

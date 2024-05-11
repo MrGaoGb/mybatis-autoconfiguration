@@ -2,6 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mrgao.xbqx.mapper.StorkMapper">
 
+    <!--开启二级缓存-->
+    <cache/>
+
     <resultMap id="BaseResultMap" type="com.mrgao.xbqx.entity.Product">
         <result column="id" property="id"/>
         <result column="pid" property="pid"/>
