@@ -77,3 +77,39 @@ ORDER BY
 
 #### ClassPathMapperScanner和ClassPathBeanDefinitionScanner
 > scan() 和 doScan() 方法，可以用来扫描类上的注解
+
+### 一级缓存、二级缓存以及装饰器模式
+#### 1、一级缓存
+```java
+
+public class PerpetualCache implements Cache {
+
+    private final String id;
+    
+    /**
+     * 基于HashMap存储
+     */
+    private Map<Object, Object> cache = new HashMap<>();
+
+    public PerpetualCache(String id) {
+        this.id = id;
+    }
+
+    @Override
+    public void putObject(Object key, Object value) {
+        // 存入缓存HashMap中
+        cache.put(key, value);
+    }
+
+    @Override
+    public Object getObject(Object key) {
+        // 从缓存HashMap中获取Val值
+        return cache.get(key);
+    }
+}
+```
+> 基于PerpetualCache类实现，主要实现是HashMap
+
+#### 2、二级缓存
+
+#### 3、Mybatis框架所涉及的装饰器模式
