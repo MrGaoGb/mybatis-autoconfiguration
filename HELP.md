@@ -8,6 +8,9 @@ http://localhost:8080/product/single?id=1
 // 根据id和名称查询商品信息(精确查询)
 http://localhost:8080/product/single?id=1&pname=xxx
 
+// 根据ID获取商品信息
+http://localhost:8080/product/single/testRange?id=1        
+
 // 查询所有商品
 http://localhost:8080/product/listAll
 // 模糊查询部分商品
@@ -109,6 +112,15 @@ public class PerpetualCache implements Cache {
 }
 ```
 > 基于PerpetualCache类实现，主要实现是HashMap
+
+#### 不开启事务，对比一级缓存和二级缓存
+> 一级缓存是基于SqlSession实现，在不开启事务的前提下，每次执行完数据库操作，都会执行closeSqlSession()方法
+> 关闭SqlSession,所以当每次执行数据库操作时都会执行创建SqlSession和关闭SqlSession的操作。
+
+> 二级缓存中Cache是基于Mapper实现的，相当于每个Mapper如果开启二级缓存时，会生成一个SynchronizedCache缓存对象，
+> 且每个对象对应一个Mapper文件。
+> 
+> 所以，综上所述所得到的结论是：一级缓存是基于SqlSession实现的；二级缓存是基于Mapper实现的。
 
 #### 2、二级缓存
 
