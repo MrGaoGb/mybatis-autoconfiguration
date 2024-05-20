@@ -42,15 +42,22 @@ public class SlidingTimeTrafficLimiter implements TrafficLimiter {
         return false;
     }
 
+    /**
+     * 滑动时间窗口限流算法构造器
+     */
     public SlidingTimeTrafficLimiter() {
+        // 先占用一个格子
         slots.addLast(0);
+        // 开启一个线程
         new Thread(() -> {
             while (true) {
                 try {
+                    // 每延时100ms 添加一个格子
                     Thread.sleep(windowsLength);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                // 添加占用一个格子
                 slots.addLast(0);
                 if (slots.size() > windowsNum) {
                     // 超过10个格子时, 先将第一个格子里的请求数减去
