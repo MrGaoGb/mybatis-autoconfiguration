@@ -3,7 +3,7 @@
 <mapper namespace="com.mrgao.xbqx.mapper.StorkMapper">
 
     <!--开启二级缓存-->
-    <cache/>
+<!--    <cache></cache>-->
 
     <resultMap id="BaseResultMap" type="com.mrgao.xbqx.entity.Product">
         <result column="id" property="id"/>

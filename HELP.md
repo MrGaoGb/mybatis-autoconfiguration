@@ -1,5 +1,13 @@
 # Getting Started
 
+### SpringMvc中controller是基于单例模式创建，所需要注意的问题
+#### 单例Bean使用注意
+> 单例Bean在整个应用内是共享的，所以需要考虑到线程安全问题，之前在玩springmvc时候，
+> spring中controller层默认是基于单例模式实现的，有些开发者在controller层创建了一
+> 些变量，那么这些变量实际上就变成共享的了，controller可能会被喝多线程访问，这些线程
+> 并发去改controller层的共享变量，可能会存在数据错乱的问题，所以在使用的时候需要特别注意下。
+
+
 ### mybatis框架集成Springboot框架学习
 ### 1、初始化工程，实现简单的接口访问查询
 ```java
@@ -8,8 +16,8 @@ http://localhost:8080/product/single?id=1
 // 根据id和名称查询商品信息(精确查询)
 http://localhost:8080/product/single?id=1&pname=xxx
 
-// 根据ID获取商品信息
-http://localhost:8080/product/single/testRange?id=1        
+// 根据ID获取商品信息(存在事务的前提下)
+http://localhost:8080/product/single/testByTransactional?id=1        
 
 // 查询所有商品
 http://localhost:8080/product/listAll
@@ -44,8 +52,6 @@ ORDER BY
 	a1.ID DESC
 
 
-
-
 -- 查不到数据
 SELECT
     a1.*,
@@ -71,6 +77,13 @@ ORDER BY
 
 ### Spring中BeanDefinitionRegistryPostProcessor注册
 > Mybatis中拦截器逻辑那块需要注意下
+![img.png](img.png)
+#### 拦截器支持以下
+> InterceptorChain#pluginAll()
+* Executor
+* StatementHandler
+* ResultSetHandler
+* ParameterHandler
 
 ### 关键方法
 #### MapperScannerConfigurer
@@ -114,6 +127,8 @@ public class PerpetualCache implements Cache {
 > 基于PerpetualCache类实现，主要实现是HashMap
 
 #### 不开启事务，对比一级缓存和二级缓存
+> 请求地址: http://localhost:8080/product/single/testByNoTransactional?id=1
+ 
 > 一级缓存是基于SqlSession实现，在不开启事务的前提下，每次执行完数据库操作，都会执行closeSqlSession()方法
 > 关闭SqlSession,所以当每次执行数据库操作时都会执行创建SqlSession和关闭SqlSession的操作。
 
@@ -121,6 +136,9 @@ public class PerpetualCache implements Cache {
 > 且每个对象对应一个Mapper文件。
 > 
 > 所以，综上所述所得到的结论是：一级缓存是基于SqlSession实现的；二级缓存是基于Mapper实现的。
+
+#### 开启事务，对比一级缓存和二级缓存
+> 请求地址: http://localhost:8080/product/single/testByTransactional?id=1
 
 #### 2、二级缓存
 
