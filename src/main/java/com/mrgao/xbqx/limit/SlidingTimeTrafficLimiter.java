@@ -4,6 +4,8 @@ package com.mrgao.xbqx.limit;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.LinkedList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * 滑动时间窗口限流
@@ -49,12 +51,14 @@ public class SlidingTimeTrafficLimiter implements TrafficLimiter {
         // 先占用一个格子
         slots.addLast(0);
         // 开启一个线程
+        // TODO 开启线程
         new Thread(() -> {
             while (true) {
                 try {
                     // 每延时100ms 添加一个格子
                     Thread.sleep(windowsLength);
                 } catch (InterruptedException e) {
+                    // 若sleep执行异常时 会出现一直执行 没有延时
                     e.printStackTrace();
                 }
                 // 添加占用一个格子
@@ -68,6 +72,26 @@ public class SlidingTimeTrafficLimiter implements TrafficLimiter {
                 }
             }
         }).start();
+
+        // TODO 采用JDK的定时器实现 延时100ms
+//        Timer timer = new Timer();
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                // 添加占用一个格子
+//                slots.addLast(0);
+//                if (slots.size() > windowsNum) {
+//                    // 超过10个格子时, 先将第一个格子里的请求数减去
+//                    reqCount = reqCount - slots.peekFirst();
+//                    // 再移除第一个格子
+//                    slots.removeFirst();
+//                    System.out.println("滑动格子:" + reqCount);
+//                }
+//            }
+//        },
+//                windowsLength,
+//                windowsLength
+//        );
     }
 
 }
