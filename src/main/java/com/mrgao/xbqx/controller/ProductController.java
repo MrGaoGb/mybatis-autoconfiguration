@@ -1,5 +1,6 @@
 package com.mrgao.xbqx.controller;
 
+import com.mrgao.xbqx.service.ProductService;
 import com.mrgao.xbqx.entity.Product;
 import com.mrgao.xbqx.mapper.StorkMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,18 @@ public class ProductController {
 
     @Autowired
     private StorkMapper storkMapper;
+    @Autowired
+    private ProductService productService;
+
+    /**
+     * 获取单个商品
+     *
+     * @return
+     */
+    @GetMapping("/product/testEnv")
+    public Integer testEnv() {
+        return productService.judgeExist();
+    }
 
     /**
      * 获取单个商品
