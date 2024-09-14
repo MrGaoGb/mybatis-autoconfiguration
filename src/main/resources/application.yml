@@ -3,7 +3,7 @@ spring:
   datasource:
     # 使用druid数据源
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://192.168.1.219:5432/postgres
+    url: jdbc:postgresql://192.168.1.218:5432/postgres
     username: openpay
     password: openpay123
     # 连接池大小根据实际情况调整

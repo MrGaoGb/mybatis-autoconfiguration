@@ -3,7 +3,7 @@
 <mapper namespace="com.mrgao.xbqx.mapper.StorkMapper">
 
     <!--开启二级缓存-->
-<!--    <cache></cache>-->
+    <!--    <cache></cache>-->
 
     <resultMap id="BaseResultMap" type="com.mrgao.xbqx.entity.Product">
         <result column="id" property="id"/>
@@ -36,6 +36,19 @@
             </if>
         </where>
     </select>
+
+    <!--更新库存金额-->
+    <update id="updatePrdCountById">
+        UPDATE
+        <include refid="table_name"/>
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="count != null">
+                stork_count = stork_count * #{count}
+            </if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
 
     <!--查询所有记录-->
     <select id="listAll" resultMap="BaseResultMap">

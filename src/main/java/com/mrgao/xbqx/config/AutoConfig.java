@@ -5,6 +5,7 @@ import lombok.Getter;
 import org.apache.ibatis.plugin.Interceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @author Mr.Gao
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Getter
 @Configuration
+@EnableTransactionManagement
 public class AutoConfig {
 
     //private final Product product;

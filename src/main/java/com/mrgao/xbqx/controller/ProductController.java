@@ -1,8 +1,8 @@
 package com.mrgao.xbqx.controller;
 
-import com.mrgao.xbqx.service.ProductService;
 import com.mrgao.xbqx.entity.Product;
 import com.mrgao.xbqx.mapper.StorkMapper;
+import com.mrgao.xbqx.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -76,6 +76,22 @@ public class ProductController {
         Product detail2 = storkMapper.getStorkDetailByPid(id, prdName);
         return detail2;
     }
+
+
+    /**
+     * 获取单个商品(在无事务的前提下，对比一级缓存和二级缓存的工作原理)
+     *
+     * @param id
+     * @return
+     */
+    @Transactional
+    @GetMapping("/product/single/prdCountToAdd")
+    public Product prdCountToAdd(@RequestParam Long id) {
+        System.out.println("-----------(一级缓存)基于SQLSession，@Transactional注解----------");
+        storkMapper.updatePrdCountById(id, 1);
+        return storkMapper.getStorkDetailByPid(id, null);
+    }
+
 
     /**
      * 获取所有商品

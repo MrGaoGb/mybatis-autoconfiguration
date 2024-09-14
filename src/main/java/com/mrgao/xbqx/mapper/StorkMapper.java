@@ -23,6 +23,15 @@ public interface StorkMapper {
     Product getStorkDetailByPid(@Param("id") Long id, @Param("prdName") String prdName);
 
     /**
+     * 更新商品库存
+     *
+     * @param id
+     * @param count
+     * @return
+     */
+    int updatePrdCountById(@Param("id") Long id, @Param("count") Integer count);
+
+    /**
      * 获取所有商品
      *
      * @param prdName
